@@ -1,5 +1,5 @@
 {
-    "name": "@elizaos/plugin-stargaze",
+    "name": "@elizaos-plugins/plugin-stargaze",
     "version": "0.1.8+build.1",
     "main": "dist/index.js",
     "type": "module",
