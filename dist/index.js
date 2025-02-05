@@ -121,7 +121,7 @@ query MarketplaceTokens($collectionAddr: String!, $limit: Int) {
 var getLatestNFT_default = {
   name: "GET_LATEST_NFT",
   similes: ["SHOW_LATEST_NFT", "FETCH_LATEST_NFT"],
-  validate: async (runtime, message) => {
+  validate: async (runtime, _message) => {
     elizaLogger2.log("\u{1F504} Validating Stargaze configuration...");
     try {
       const config = await validateStargazeConfig(runtime);
@@ -293,7 +293,7 @@ Extract the collection address from the above messages and respond with the appr
 var getCollectionStats_default = {
   name: "GET_COLLECTION_STATS",
   similes: ["CHECK_COLLECTION_STATS", "COLLECTION_INFO"],
-  validate: async (runtime, message) => {
+  validate: async (runtime, _message) => {
     elizaLogger3.log("\u{1F504} Validating Stargaze configuration...");
     try {
       const config = await validateStargazeConfig(runtime);
@@ -474,7 +474,7 @@ query TokenSales($collectionAddr: String!, $limit: Int) {
 var getTokenSales_default = {
   name: "GET_TOKEN_SALES",
   similes: ["CHECK_SALES", "RECENT_SALES"],
-  validate: async (runtime, message) => {
+  validate: async (runtime, _message) => {
     elizaLogger4.log("\u{1F504} Validating Stargaze configuration...");
     try {
       const config = await validateStargazeConfig(runtime);
@@ -540,7 +540,7 @@ var getTokenSales_default = {
       const formatDate = (dateStr) => {
         try {
           return new Date(dateStr).toLocaleString();
-        } catch (e) {
+        } catch {
           return dateStr;
         }
       };
