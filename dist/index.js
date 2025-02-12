@@ -42,21 +42,22 @@ var debugLog = {
   },
   response: (response) => {
     elizaLogger.log("\u2705 API Response:", {
-      status: response?.status,
-      data: response?.data || "No data"
+      status: response == null ? void 0 : response.status,
+      data: (response == null ? void 0 : response.data) || "No data"
     });
   },
   error: (error) => {
+    var _a, _b, _c, _d, _e;
     elizaLogger.error("\u26D4 Error Details:", {
-      message: error?.message,
+      message: error == null ? void 0 : error.message,
       response: {
-        status: error?.response?.status,
-        data: error?.response?.data
+        status: (_a = error == null ? void 0 : error.response) == null ? void 0 : _a.status,
+        data: (_b = error == null ? void 0 : error.response) == null ? void 0 : _b.data
       },
       config: {
-        url: error?.config?.url,
-        method: error?.config?.method,
-        data: error?.config?.data
+        url: (_c = error == null ? void 0 : error.config) == null ? void 0 : _c.url,
+        method: (_d = error == null ? void 0 : error.config) == null ? void 0 : _d.method,
+        data: (_e = error == null ? void 0 : error.config) == null ? void 0 : _e.data
       }
     });
   },
@@ -134,6 +135,7 @@ var getLatestNFT_default = {
   },
   description: "Get the latest NFT from a Stargaze collection",
   handler: async (runtime, message, state, _options, callback) => {
+    var _a, _b, _c;
     elizaLogger2.log("\u{1F680} Starting Stargaze GET_LATEST_NFT handler...");
     if (!state) {
       elizaLogger2.log("Creating new state...");
@@ -177,7 +179,7 @@ var getLatestNFT_default = {
         }
       );
       debugLog.response(response);
-      if (!response.data?.data?.tokens?.tokens) {
+      if (!((_c = (_b = (_a = response.data) == null ? void 0 : _a.data) == null ? void 0 : _b.tokens) == null ? void 0 : _c.tokens)) {
         throw new Error("Unexpected API response structure");
       }
       const latestNFT = response.data.data.tokens.tokens[0];
@@ -306,6 +308,7 @@ var getCollectionStats_default = {
   },
   description: "Get detailed statistics for a Stargaze collection",
   handler: async (runtime, message, state, _options, callback) => {
+    var _a, _b, _c, _d, _e, _f;
     elizaLogger3.log("\u{1F680} Starting Stargaze GET_COLLECTION_STATS handler...");
     if (!state) {
       elizaLogger3.log("Creating new state...");
@@ -348,8 +351,8 @@ var getCollectionStats_default = {
         }
       );
       debugLog.response(response);
-      const stats = response.data?.data?.collection?.stats;
-      const name = response.data?.data?.collection?.name;
+      const stats = (_c = (_b = (_a = response.data) == null ? void 0 : _a.data) == null ? void 0 : _b.collection) == null ? void 0 : _c.stats;
+      const name = (_f = (_e = (_d = response.data) == null ? void 0 : _d.data) == null ? void 0 : _e.collection) == null ? void 0 : _f.name;
       if (!stats) {
         throw new Error("No stats found for collection");
       }
@@ -487,6 +490,7 @@ var getTokenSales_default = {
   },
   description: "Get recent sales data for a Stargaze collection",
   handler: async (runtime, message, state, _options, callback) => {
+    var _a, _b, _c;
     elizaLogger4.log("\u{1F680} Starting Stargaze GET_TOKEN_SALES handler...");
     if (!state) {
       elizaLogger4.log("Creating new state...");
@@ -530,8 +534,8 @@ var getTokenSales_default = {
         }
       );
       debugLog.response(response);
-      const sales = response.data?.data?.tokenSales?.tokenSales;
-      if (!sales?.length) {
+      const sales = (_c = (_b = (_a = response.data) == null ? void 0 : _a.data) == null ? void 0 : _b.tokenSales) == null ? void 0 : _c.tokenSales;
+      if (!(sales == null ? void 0 : sales.length)) {
         throw new Error("No sales found for collection");
       }
       const formatPrice = (price, symbol) => `${Number(price).toLocaleString(void 0, {
